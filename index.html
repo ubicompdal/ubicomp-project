@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <head>
 	<title>Race</title>
-		<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
-		<script src="js/sso.js"></script>
-		<script src="js/location.js"></script>
-		<script src="js/db.js"></script>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<!-- Anton, work your magic -->
-	<body>
-		<h1>Body Header</h1>
-		<p>text</p>
-		<input type="button" id="start" value="Start"/>
-		<input type="button" id="stop" value="Stop"/>
-	</body>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="js/sso.js"></script>
+	<script src="js/location.js"></script>
+	<script src="js/db.js"></script>
+	<script src="js/clock.js"></script>
+
+	<link rel="stylesheet" href="style.css" />
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+</head>
+<body>
+
+	<div class="container">
+		<form class="form-signin">
+			<h2>FCS Run</h2>
+			<p>Click start to start running!</p>
+			<div class="alert alert-success" id="clock">00:00:00</div>
+			<div class="alert alert-warning" id="distance">0.00km</div>
+			<input type="button" class="btn btn-large btn-primary" id="start" value="Start"/>
+			<input type="button" class="btn btn-large" id="stop" value="Stop"/>
+		</form>
+	</div> <!-- /container -->
+</body>
 </html>

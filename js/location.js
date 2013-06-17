@@ -10,7 +10,7 @@ $(document).ready(function(){
 	});
 
 	$("#stop").click(function(){
-		alert(calculateDistance());
+		alert('Save this value: ' + calculateDistance());
 		clearInterval(running);
 	});
 });
@@ -21,6 +21,7 @@ function getLocation(){
 		navigator.geolocation.getCurrentPosition(
 		                                         function(position) {
 		                                         	locations.push(position.coords);
+		                                         	$("#distance").text(calculateDistance().toFixed(3) + "km");
 		                                         	console.log(position.coords);
 		                                         },
 		                                         function(){
