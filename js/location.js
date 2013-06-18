@@ -21,7 +21,7 @@ function getLocation(){
 		navigator.geolocation.getCurrentPosition(
 		                                         function(position) {
 		                                         	locations.push(position.coords);
-		                                         	$("#distance").text(calculateDistance().toFixed(3) + "km");
+		                                         	$("#distance .value").text(calculateDistance().toFixed(3) + "km");
 		                                         	console.log(position.coords);
 		                                         },
 		                                         function(){

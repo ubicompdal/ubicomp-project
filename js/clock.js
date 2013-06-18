@@ -15,7 +15,7 @@ function showTime()
 		m = 0;
 		h++;
 	}
-	$("#clock").text(checkTime(h)+":"+checkTime(m)+":"+checkTime(s)+"."+checkTime(ms));
+	$("#clock .value").text(checkTime(h)+":"+checkTime(m)+":"+checkTime(s)+"."+checkTime(ms));
 	ms++;
 	timer=setTimeout('showTime()', 10);
 }
@@ -31,9 +31,13 @@ function checkTime(i)
 $(document).ready(function(){
 	$("#start").click(function(){
 		showTime();
+		$(this).hide();
+		$("#stop").show();
 	});
 	$("#stop").click(function(){
 		h=0; m=0; s=0;
 		clearTimeout(timer);
+		$(this).hide();
+		$("#start").show();
 	});
 });
