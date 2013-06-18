@@ -68,3 +68,13 @@ body {
 #stop {
 	display:none;
 }
+
+.person {
+	margin-top:10px;
+	background-color:#eee;
+}
+
+#username {
+	margin:0;
+	padding:0;
+}
