@@ -1,9 +1,12 @@
-var h=0, m=0, s=0;
+var h=0, m=0, s=0, ms=0;
 var timer;
 function showTime()
 {
 	var today=new Date();
-
+	if(ms>=100){
+		ms = 0;
+		s++;
+	}
 	if(s>=60){
 		s = 0;
 		m++;
@@ -12,9 +15,9 @@ function showTime()
 		m = 0;
 		h++;
 	}
-	$("#clock").text(checkTime(h)+":"+checkTime(m)+":"+checkTime(s));
-	s++;
-	timer=setTimeout('showTime()',1000);
+	$("#clock").text(checkTime(h)+":"+checkTime(m)+":"+checkTime(s)+"."+checkTime(ms));
+	ms++;
+	timer=setTimeout('showTime()', 10);
 }
 // add a zero in front of numbers<10
 function checkTime(i)
