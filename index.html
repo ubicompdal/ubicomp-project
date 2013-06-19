@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <head>
-	<title>Race<title>
-		<script src="js/sso.js"></script>
-		<script src="js/location.js"></script>
-		<script src="js/db.js"></script>
-		<link rel="stylesheet" href="style.css" />
-	</head>
-	<body>
-		<h1>Body Header</h1>
-		<p>text</p>
-	</body>
+	<title>Race</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="js/sso.js"></script>
+	<script src="js/location.js"></script>
+	<script src="js/db.js"></script>
+	<script src="js/clock.js"></script>
+	<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="metro.css" />
+	<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+	<div class="container">
+
+		<form class="form-signin">
+
+			<h2>FCS Run</h2>
+			<div class="navbar">
+				<div class="navbar-inner">
+					<ul class="nav">
+						<li class="active"><a href="#"> <i class="icon-road"></i> Run</a></li>
+						<li><a href="#"><i class="icon-bar-chart"></i> Stats</a></li>
+						<li><a href="#"><i class="icon-star"></i> Scores</a></li>
+					</ul>
+				</div>
+			</div>
+			<p>Click start to start running!</p>
+			<div class="alert alert-success" id="clock">
+				<i class="icon-time"></i>
+				<span class="value">00:00:00.00</span>
+			</div>
+			<div class="alert alert-warning" id="distance">
+				<i class="icon-group"></i>
+				<span class="value">0.000km</span>
+			</div>
+			<input type="button" class="btn btn-success" id="start" value="Start"/>
+			<input type="button" class="btn btn-danger" id="stop" value="Stop"/>
+		</form>
+	</div> <!-- /container -->
+</body>
 </html>
