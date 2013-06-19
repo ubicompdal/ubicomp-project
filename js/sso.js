@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-//kip
-=======
    var AuthWidget = function (_options) {
 
             var eventClass = function () {
@@ -127,4 +124,3 @@
             obj.init();
             return obj;
         };
->>>>>>> origin/sso
