@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login!</title>
+    <script src="js/handlebars.min.js" type="text/javascript"></script>
+    <script src="js/underscore-min.js" type="text/javascript"></script>
+    <script src="js/sso.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <div data-role="authWidget">
+        <span data-role="signin">
+            <span
+                class="g-signin"
+                data-callback="signinCallback"
+                data-clientid="645312960970.apps.googleusercontent.com"
+                data-cookiepolicy="single_host_origin"
+                data-requestvisibleactions="http://schemas.google.com/AddActivity"
+                data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.profile"></span>
+        </span>
+
+        <span data-role="revoke" style="display: none;">
+            <a href="#" target="_blank">Sign-out</a>
+        </span>
+    </div>
+
+    <script type="text/javascript">
+        var widget = AuthWidget({
+            container: '[data-role="authWidget"]',
+            signinControl: '[data-role="signin"]',
+            revokeControl: '[data-role="revoke"]'
+        });      
+
+        function signinCallback(token) {
+            widget.signIn(token);
+        }
+    </script>
+</body>
+</html>
