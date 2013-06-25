@@ -60,11 +60,15 @@
                 obj.triggerEvent("login:successful");
 
                 gapi.client.load('oauth2', 'v2', function () {
-                    gapi.client.oauth2.userinfo.get()
-                        .execute(function (profile) {
-                            obj.profile = profile;
-                            obj.triggerEvent("loaded:profile", profile);
-                        });
+                    getProfile();
+                });
+            }
+
+            function getProfile() {
+                gapi.client.oauth2.userinfo.get()
+                .execute(function (profile) {
+                    obj.profile = profile;
+                    obj.triggerEvent("loaded:profile", profile);
                 });
             }
 
@@ -117,6 +121,10 @@
 
                 signIn: function (token) {
                     signIn(token);
+                },
+
+                loadProfile: function () {
+                    getProfile();
                 }
             });
 
