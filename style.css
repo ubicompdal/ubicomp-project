@@ -1,63 +1,12 @@
-<<<<<<< HEAD
-body
-{
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #333;
-=======
 body {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	background-color: #333;
->>>>>>> 672e0b7d579a0da4ee54259fb28319fc7c97c2da
 }
-
-#clock, #distance
-{
-    font-size: 2em;
-    text-align: center;
+#clock, #distance {
+	font-size:2em;
+	text-align:center;
 }
-<<<<<<< HEAD
-
-.form-signin
-{
-    max-width: 680px;
-    padding: 19px 29px 29px;
-    margin: 0 auto 20px;
-    background-color: #fff;
-    border: 1px solid #e5e5e5;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
-    box-shadow: 0 1px 2px rgba(0,0,0,.05);
-}
-
-    .form-signin .form-signin-heading,
-    .form-signin .checkbox
-    {
-        margin-bottom: 10px;
-    }
-
-    .form-signin input[type="text"],
-    .form-signin input[type="password"]
-    {
-        font-size: 16px;
-        height: auto;
-        margin-bottom: 15px;
-        padding: 7px 9px;
-    }
-
-.navbar-inner
-{
-    padding: 0 !important;
-}
-
-.nav a
-{
-    margin: 0 !important;
-=======
 .content {
 	max-width: 680px;
 	padding: 10px 20px 20px;
@@ -83,75 +32,49 @@ body {
 	height: auto;
 	margin-bottom: 15px;
 	padding: 7px 9px;
->>>>>>> 672e0b7d579a0da4ee54259fb28319fc7c97c2da
 }
 
-#distance, #clock
-{
-    line-height: 1em;
-    font-size: 2em;
+.navbar-inner {
+	padding:0 !important;
+}
+
+.nav a {
+
+	margin: 0 !important;
+}
+
+#distance, #clock {
+	line-height: 1em;
+	font-size: 2em;
 }
 
 
 .navbar .nav,
-.navbar .nav > li
-{
-    float: none;
-    display: inline-block;
-    *display: inline; /* ie7 fix */
-    *zoom: 1; /* hasLayout ie7 trigger */
-    vertical-align: top;
+.navbar .nav > li {
+	float:none;
+	display:inline-block;
+	*display:inline; /* ie7 fix */
+	*zoom:1; /* hasLayout ie7 trigger */
+	vertical-align: top;
 }
 
-.navbar-inner
-{
-    text-align: center;
+.navbar-inner {
+	text-align:center;
 }
 
-#start, #stop
-{
-    width: 100%;
+#start, #stop {
+	width:100%;
+}
+#stop {
+	display:none;
 }
 
-#stop
-{
-    display: none;
+.person {
+	margin-top:10px;
+	background-color:#eee;
 }
 
-.person
-{
-    margin-top: 10px;
-    background-color: #eee;
-}
-
-#username
-{
-    margin: 0;
-    padding: 0;
-}
-
-.authWidgetContainer
-{
-    text-align: center;
-    overflow: hidden;
-    position: relative;
-    top: 50%;
-}
-
-html.auth, body.auth
-{
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
-
-.sign-out-button
-{
-    float: right;
-    background-color: rgb(211, 211, 211);
-    -webkit-border-radius: 10px;    
-    -moz-border-radius: 10px;
-    border: 3px solid grey;
-    padding: 3px;
-    text-align: center;
+#username {
+	margin:0;
+	padding:0;
 }
