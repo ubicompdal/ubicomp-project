@@ -7,6 +7,33 @@
 		<script src="js/location.js"></script>
 		<script src="js/db.js"></script>
 		<script src="js/clock.js"></script>
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	    <script type="text/javascript">
+	      google.load("visualization", "1", {packages:["corechart"]});
+	      google.setOnLoadCallback(drawChart);
+	      function drawChart() {
+	        var data = google.visualization.arrayToDataTable([
+	          ['Day', 'KM'],
+	          ['M',  45],
+	          ['T',  30],
+	          ['W',  29.5],
+	          ['T',  20],
+	          ['F',  15],
+	          ['S',  30],
+	          ['S',  25]
+	        ]);
+
+	        var options = {
+	          title: 'Last 7 Days',
+	          vAxis: {title: 'KM',  titleTextStyle: {color: 'red'}},
+	          colors:["green"]
+	        };
+
+	        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+	        chart.draw(data, options);
+	      }
+	    </script>
+
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="metro.css" />
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
@@ -21,19 +48,21 @@
 				<div class="navbar">
 					<div class="navbar-inner">
 						<ul class="nav">
-							<li><a href="#"> <i class="icon-road"></i> Run</a></li>
+							<li><a href="index.html"> <i class="icon-road"></i> Run</a></li>
 							<li class="active"><a href="#"><i class="icon-bar-chart"></i> Stats</a></li>
 							<li><a href="#"><i class="icon-star"></i> Scores</a></li>
 						</ul>
 					</div>
 				</div>
-				<div class="row-fluid person">
-					<div class="span2 hidden-phone"><img src="http://placehold.it/100"/></div>
-					<div class="span10">
+				<!--<div class="row-fluid person">
+					<div class="span2 hidden-phone"><img src="http://placehold.it/100"/></div>-->
+					<div id="chart_div" style="width: 700px; height: 400px;"></div>
+
+					<!--<div class="span10">
 						<h3 class="" id="username">Danny Wilson</h3>
 						<div class="progress">
 							<div class="bar bar-success" style="width: 60%;">25km</div>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</form>
