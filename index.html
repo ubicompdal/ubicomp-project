@@ -3,6 +3,7 @@
 	<title>Race</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="js/underscore-min.js"></script>
 	<script src="js/sso.js"></script>
 	<script src="js/location.js"></script>
 	<script src="js/db.js"></script>
@@ -13,11 +14,29 @@
 	<link rel="stylesheet" href="style.css" />
 </head>
 <body>
-	<div class="container">
-
+ 
+	<div class="container" data-role="authWidget">
+            
+	
 		<form class="form-signin">
 
-			<h2>FCS Run</h2>
+			<h2>FCS Run <span class="sign-out-button" data-role="revoke" style="display: none;">
+                    <a href="#" target="_blank">Sign-out</a>
+                </span></h2>            
+                <div style="clear:both;height: 10px;"></div> <!-- spacer -->
+                <span data-role="signin" style="display:none;">
+                    <span
+                        class="g-signin"
+                        data-callback="signinCallback"
+                        data-clientid="645312960970.apps.googleusercontent.com"
+                        data-cookiepolicy="single_host_origin"
+                        data-requestvisibleactions="http://schemas.google.com/AddActivity"
+                        data-scope="https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.profile"></span>
+                </span>
+    
+                   
+        <script src="js/sso-app.js" type="text/javascript"></script>
+            
 			<div class="navbar">
 				<div class="navbar-inner">
 					<ul class="nav">
@@ -40,5 +59,13 @@
 			<input type="button" class="btn btn-danger" id="stop" value="Stop"/>
 		</form>
 	</div> <!-- /container -->
+    
+    <!-- example to load profile -->
+    <script type="text/javascript">
+        widget.addEvent("loaded:profile", function (profile) {
+            // profile returned here!!
+        });                
+    </script>
+    
 </body>
 </html>
