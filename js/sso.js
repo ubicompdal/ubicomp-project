@@ -64,11 +64,13 @@
                 });
             }
 
-            function getProfile() {
+            function getProfile(fn) {
                 gapi.client.oauth2.userinfo.get()
                 .execute(function (profile) {
                     obj.profile = profile;
                     obj.triggerEvent("loaded:profile", profile);
+                    if(_.isFunction(fn))
+                        fn(profile);
                 });
             }
 
@@ -123,12 +125,11 @@
                     signIn(token);
                 },
 
-                loadProfile: function () {
-                    getProfile();
+                loadProfile: function (fn) {
+                    getProfile(fn);
                 }
             });
 
-            obj.options = options;
-            obj.init();
+            obj.options = options;            
             return obj;
         };

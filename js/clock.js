@@ -26,15 +26,17 @@ function checkTime(i)
 	{
 		i="0" + i;
 	}
-	return i;
+	return i;    
 }
+
 $(document).ready(function(){
 	$("#start").click(function(){
 		showTime();
 		$(this).hide();
 		$("#stop").show();
 	});
-	$("#stop").click(function(){
+	$("#stop").click(function(){        
+        App.triggerEvent("stop:clock", getTimeInMilliseconds(h, m, s, ms));        
 		h=0; m=0; s=0;
 		clearTimeout(timer);
 		$(this).hide();

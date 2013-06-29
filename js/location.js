@@ -6,24 +6,24 @@
 var locations = [];
 var watch = null;
 // dom event handlers
-$(document).ready(function () {
-
+$(document).ready(function () {       
+    
+    //stop tracking the location and record the distance
+    App.addEvent("stop:clock", function(time){
+        navigator.geolocation.clearWatch(watch);
+		var distance = calculateDistance(locations);
+		console.log(distance);
+		if(distance > 0){            
+            App.triggerEvent("save:distance", { distance: distance, deltaTime: time } );
+		} else {
+			alert('You didn\'t move. Stop being lazy!');
+		}
+    });
+    
 	//start watching the user location
 	$("#start").click(function () {
 		locations = [];
 		watch = getLocation();
-	});
-
-	//stop tracking the location and record the distance
-	$("#stop").click(function () {
-		navigator.geolocation.clearWatch(watch);
-		var distance = calculateDistance(locations);
-		console.log(distance);
-		if(distance > 0){
-			alert('Save this value: ' + distance);
-		} else {
-			alert('You didn\'t move. Stop being lazy!');
-		}
 	});
 });
 

@@ -3,6 +3,9 @@
 	<title>Race</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="js/underscore-min.js"></script>
+    <script src="js/handlebars.min.js"></script>
+    <script src="js/App.js"></script>
 	<script src="js/sso.js"></script>
 	<script src="js/location.js"></script>
 	<script src="js/db.js"></script>
@@ -16,6 +19,18 @@
 		max-width:1920px !important;
 	}
 	</style>
+    
+    <script id="racer-list-template" type="text/x-handlebars-template">
+        
+        {{#each this}}
+        <tr>
+            <td>{{position @index}}</td>
+            <td>{{given_name}}</td>
+            <td>{{family_name}}</td>
+            <td>{{totaldistance}}km</td>
+        </tr>        
+        {{/each}}
+    </script>
 </head>
 <body>
 	<div class="container">
@@ -30,7 +45,7 @@
 						<th>Distance</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="racer-container">
 					<tr>
 						<td>1</td>
 						<td>Mark</td>
@@ -53,5 +68,30 @@
 			</table>
 		</div>
 	</div> <!-- /container -->
+    
+    <script type="text/javascript">
+        (function($){
+            $(function(){
+                
+                Handlebars.registerHelper('position', function(number) {
+                    number = number + 1;                    
+                    var s = suffix(number);
+                    
+                    return new Handlebars.SafeString(number + "<sup>" + s + "</sup>");
+                });
+            
+                Db.profiles.all().done(function(everyone){
+                    everyone = _.sortBy(_.map(everyone, function(someone){ 
+                                    return Map(someone); 
+                                }), 'totaldistance');
+                    
+                    var view = Handlebars.compile($("#racer-list-template").html());
+                    var html = view(everyone);
+                    $("#racer-container").html(html);
+                });
+            });
+        })(jQuery);
+    </script>
+    
 </body>
 </html>
