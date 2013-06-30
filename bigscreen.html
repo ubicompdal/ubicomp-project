@@ -59,18 +59,16 @@
                                     return Map(someone);
                                 }), 'totaldistance').reverse();
 
-                    var view = Handlebars.compile($("#racer-list-template").html());
-
+                    var view = Handlebars.compile($("#racer-list-template").html());                    
+                    var html = view(everyone);
+                    $("#racer-container").html(html);
+                
                     var firstPlace = $('.barprogress:first').data('distance');
                     $('.barprogress').each(function(){
                     	var percentage = $(this).data('distance') / firstPlace * 100;
-                    	$(this).html('<div class="progress">
-										<div class="bar bar-success" style="width: '+ percentage +'%;"></div>
-									</div>');
+                    	$(this).html('<div class="progress"><div class="bar bar-success" style="width: '+ percentage +'%;"></div></div>');
                     });
 
-                    var html = view(everyone);
-                    $("#racer-container").html(html);
 
                     /*_.each(everyone, function(someone){
 
