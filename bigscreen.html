@@ -3,6 +3,7 @@
 	<title>Race</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="js/jquery.thingbroker.min.js"></script>
     <script src="js/underscore-min.js"></script>
     <script src="js/handlebars.min.js"></script>
     <script src="js/App.js"></script>
@@ -32,8 +33,8 @@
         {{/each}}
     </script>
 </head>
-<body>
-	<div class="container">
+<body>            
+	<div id="largescreen" class="container">
 		<div class="content">
 			<h2>FCS Run</h2>
 			<table class="table table-striped table-bordered">
@@ -70,17 +71,9 @@
 	</div> <!-- /container -->
     
     <script type="text/javascript">
-        (function($){
-            $(function(){
-                
-                Handlebars.registerHelper('position', function(number) {
-                    number = number + 1;                    
-                    var s = suffix(number);
-                    
-                    return new Handlebars.SafeString(number + "<sup>" + s + "</sup>");
-                });
-            
-                Db.profiles.all().done(function(everyone){
+        
+        function updateList() {
+            Db.profiles.all().done(function(everyone){
                     everyone = _.sortBy(_.map(everyone, function(someone){ 
                                     return Map(someone); 
                                 }), 'totaldistance');
@@ -88,7 +81,29 @@
                     var view = Handlebars.compile($("#racer-list-template").html());
                     var html = view(everyone);
                     $("#racer-container").html(html);
+                    
+                    /*_.each(everyone, function(someone){
+                                                                                          
+                    });*/
+                });                   
+        }
+        
+        (function($){
+            $(function(){
+                
+                /*var display = $.ThingBroker({url: "http://localhost:8080/thingbroker"}).getThing("largedisplay2");
+                if(_.isEmpty(display))
+                    display = $.ThingBroker({url: "http://localhost:8080/ubicomp-project/thingbroker"});
+                        .postThing("largedisplay");*/
+                
+                Handlebars.registerHelper('position', function(number) {
+                    number = number + 1;                    
+                    var s = suffix(number);
+                    
+                    return new Handlebars.SafeString(number + "<sup>" + s + "</sup>");
                 });
+                            
+                setInterval('updateList()');
             });
         })(jQuery);
     </script>
