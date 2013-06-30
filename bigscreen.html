@@ -20,20 +20,20 @@
 		max-width:1920px !important;
 	}
 	</style>
-    
+
     <script id="racer-list-template" type="text/x-handlebars-template">
-        
+
         {{#each this}}
         <tr>
             <td>{{position @index}}</td>
-            <td>{{given_name}}</td>
-            <td>{{family_name}}</td>
+            <td>{{given_name}} {{family_name}}</td>
+            <td class="barprogress" data-distance="{{totaldistance}}"></td>
             <td>{{totaldistance}}km</td>
-        </tr>        
+        </tr>
         {{/each}}
     </script>
 </head>
-<body>            
+<body>
 	<div id="largescreen" class="container">
 		<div class="content">
 			<h2>FCS Run</h2>
@@ -41,72 +41,62 @@
 				<thead>
 					<tr>
 						<th>#</th>
-						<th>First Name</th>
-						<th>Last Name</th>
+						<th>Name</th>
+						<th>Progress</th>
 						<th>Distance</th>
 					</tr>
 				</thead>
-				<tbody id="racer-container">
-					<tr>
-						<td>1</td>
-						<td>Mark</td>
-						<td>Otto</td>
-						<td>120km</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>34km</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>15km</td>
-					</tr>
-				</tbody>
+				<tbody id="racer-container"></tbody>
 			</table>
 		</div>
 	</div> <!-- /container -->
-    
+
     <script type="text/javascript">
-        
+
         function updateList() {
             Db.profiles.all().done(function(everyone){
-                    everyone = _.sortBy(_.map(everyone, function(someone){ 
-                                    return Map(someone); 
+                    everyone = _.sortBy(_.map(everyone, function(someone){
+                                    return Map(someone);
                                 }), 'totaldistance').reverse();
-                    
+
                     var view = Handlebars.compile($("#racer-list-template").html());
+
+                    var firstPlace = $('.barprogress:first').data('distance');
+                    $('.barprogress').each(function(){
+                    	var percentage = $(this).data('distance') / firstPlace * 100;
+                    	$(this).html('<div class="progress">
+										<div class="bar bar-success" style="width: '+ percentage +'%;"></div>
+									</div>');
+                    });
+
                     var html = view(everyone);
                     $("#racer-container").html(html);
-                    
+
                     /*_.each(everyone, function(someone){
-                                                                                          
+
                     });*/
-                });                   
+                });
         }
-        
+
         (function($){
             $(function(){
-                
+
                 /*var display = $.ThingBroker({url: "http://localhost:8080/thingbroker"}).getThing("largedisplay2");
                 if(_.isEmpty(display))
                     display = $.ThingBroker({url: "http://localhost:8080/ubicomp-project/thingbroker"});
                         .postThing("largedisplay");*/
-                
+
                 Handlebars.registerHelper('position', function(number) {
-                    number = number + 1;                    
+                    number = number + 1;
                     var s = suffix(number);
-                    
+
                     return new Handlebars.SafeString(number + "<sup>" + s + "</sup>");
                 });
-                            
-                setInterval('updateList()');
+
+                setInterval(updateList,1000);
             });
         })(jQuery);
     </script>
-    
+
 </body>
 </html>
