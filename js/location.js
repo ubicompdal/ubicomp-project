@@ -14,7 +14,7 @@ $(document).ready(function () {
 		var distance = calculateDistance(locations);
 		console.log(distance);
 		if(distance > 0){            
-            App.triggerEvent("save:distance", { distance: distance, deltaTime: time } );
+            App.triggerEvent("save:distance", { distance: distance, deltaTime: time, date: new Date() } );
 		} else {
 			alert('You didn\'t move. Stop being lazy!');
 		}
