@@ -76,7 +76,7 @@
             Db.profiles.all().done(function(everyone){
                     everyone = _.sortBy(_.map(everyone, function(someone){ 
                                     return Map(someone); 
-                                }), 'totaldistance');
+                                }), 'totaldistance').reverse();
                     
                     var view = Handlebars.compile($("#racer-list-template").html());
                     var html = view(everyone);
