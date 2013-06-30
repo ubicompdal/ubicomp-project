@@ -42,6 +42,8 @@ function Map(profile){
     _.each(viewmodel.distances, function(item){
         if(item.distance)
             item.distance = (item.distance).toFixed(2);
+        if(item.date)
+            item.date = item.date.toString();
         item.percent = ((item.distance / maxDist.distance) * 100).toFixed(2);
     });    
         
