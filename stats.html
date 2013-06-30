@@ -18,11 +18,14 @@
 			<div class="span2 hidden-phone"><img style="width:100px;" src="{{picture}}"/></div>
 				<div class="span10">
 					<h3 class="" id="username">{{name}}</h3>
+                    
+                    {{#each distances}}
+                    
 					<div class="progress">
-					<div class="bar bar-success" style="width: {{percentdone}}%;max-width:100%">
-						{{totaldistance}}km in {{totaltime}}
-					</div>
-				</div>
+					   <div class="bar bar-success" style="width:{{percent}}%;"> {{distance}}km</div>
+                    </div>        
+                    {{/each}}
+				
 			</div>
 		</script>
 	</head>

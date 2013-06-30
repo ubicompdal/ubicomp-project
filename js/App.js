@@ -21,25 +21,41 @@ function Map(profile){
                      if(item.distance)
                         partialResult.totaldistance = partialResult.totaldistance + item.distance;
                      if(item.deltaTime)
-                        partialResult.totaltime = partialResult.totaltime + item.deltaTime;                             
+                        partialResult.totaltime = partialResult.totaltime + item.deltaTime;                                                                 
                      return partialResult;
                   }, { 
                       totaldistance: 0, 
-                      totaltime: 0 
-                 });
+                      totaltime: 0,
+                      percent:0
+                 });  
             
     result.totaltime = toHumanReadableTimeFromMilliseconds(result.totaltime);
     result.totaldistance = Math.round(result.totaldistance * 100) / 100;
-    result.percentdone = result.totaldistance / 100; //hardcode 100kms
+    result.percentdone = result.totaldistance / 100; //hardcode 100kms    
     
+    var maxDist = _.max(profile.distances, function(item){ 
+        if(item.distance)
+            return item.distance; 
+        return 0;
+    });
     var viewmodel = _.extend(result, profile);   
+    _.each(viewmodel.distances, function(item){
+        if(item.distance)
+            item.distance = (item.distance).toFixed(2);
+        item.percent = ((item.distance / maxDist.distance) * 100).toFixed(2);
+    });    
+        
     return viewmodel;    
 }
 
 (function($){
     $(function(){
         
-            window.App = {};
+            window.App = {
+                registerLargeScreen : function(){
+                    
+                }            
+            };
         
             var eventClass = function () {
                 this._callbacks = {};
