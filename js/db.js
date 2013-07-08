@@ -5,12 +5,12 @@ window.Db = (function(){
 	
 	function url(id){
 		if(id)
-			return "http://localhost:8080/thingbroker/things?thingId=" + id;
-		return "http://localhost:8080/thingbroker/things";
+			return "http://" + window.location.host + "/thingbroker/things?thingId=" + id;
+		return "http://" + window.location.host + "/thingbroker/things";
 	}
     
     function profileUrl(){
-        return 'http://localhost:8080/thingbroker/things?type=profile';
+        return "http://" + window.location.host + '/thingbroker/things?type=profile';
     }
 	
 	function Update(id, data){	
