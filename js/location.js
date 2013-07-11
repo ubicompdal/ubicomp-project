@@ -1,4 +1,4 @@
-/* 	
+/*
  *	Geolocation Logic
  *	Danny Wilson
  */
@@ -6,20 +6,28 @@
 var locations = [];
 var watch = null;
 // dom event handlers
-$(document).ready(function () {       
-    
+$(document).ready(function () {
+
     //stop tracking the location and record the distance
     App.addEvent("stop:clock", function(time){
-        navigator.geolocation.clearWatch(watch);
-		var distance = calculateDistance(locations);
-		console.log(distance);
-		if(distance > 0){            
-            App.triggerEvent("save:distance", { distance: distance, deltaTime: time, date: new Date() } );
+    	navigator.geolocation.clearWatch(watch);
+    	var distance = calculateDistance(locations);
+    	var clk = $('#clock .value').text().split(':');
+    	var seconds = parseInt(clk[0] * 3600) + parseInt(clk[1] * 60) + parseInt(clk[2]);
+
+		//distance is in km and time is in seconds
+		var meters = distance*1000;
+		var speed = meters / seconds;
+		//if the speed is over 10m/s, they are cheaters.
+		var cheating = speed > 10;
+
+		if(distance > 0 && !cheating){
+			App.triggerEvent("save:distance", { distance: distance, deltaTime: time, date: new Date() } );
 		} else {
-			alert('You didn\'t move. Stop being lazy!');
+			alert('You didn\'t move or you were cheating. Don\'t be lazy!');
 		}
-    });
-    
+	});
+
 	//start watching the user location
 	$("#start").click(function () {
 		locations = [];
@@ -79,9 +87,9 @@ function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 	var dLat = deg2rad(lat2 - lat1); // deg2rad below
 	var dLon = deg2rad(lon2 - lon1);
 	var a =
-		Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-		Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
-		Math.sin(dLon / 2) * Math.sin(dLon / 2);
+	Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+	Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) *
+	Math.sin(dLon / 2) * Math.sin(dLon / 2);
 	var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 	var d = R * c; // Distance in km
 	return d;

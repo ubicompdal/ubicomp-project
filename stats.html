@@ -1,4 +1,5 @@
-	<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
 	<head>
 		<title>Race</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,14 +19,11 @@
 			<div class="span2 hidden-phone"><img style="width:100px;" src="{{picture}}"/></div>
 				<div class="span10">
 					<h3 class="" id="username">{{name}}</h3>
-                    
                     {{#each distances}}
-                    
 					<div class="progress">
 					   <div class="bar bar-success" style="width:{{percent}}%;"> {{distance}}km on {{date}}</div>
-                    </div>        
+                    </div>
                     {{/each}}
-				
 			</div>
 		</script>
 	</head>
@@ -52,7 +50,7 @@
 						<ul class="nav">
 							<li><a href="index.html"> <i class="icon-road"></i> Run</a></li>
 							<li class="active"><a href="stats.html"><i class="icon-bar-chart"></i> Stats</a></li>
-							<li><a href="goals.html"><i class="icon-star"></i> Goals</a></li>
+							<li><a href="bigscreen.html"><i class="icon-star"></i> Rankings</a></li>
 						</ul>
 					</div>
 				</div>
@@ -83,6 +81,5 @@
 			widget.init();
 		})(jQuery);
 		</script>
-
 	</body>
-	</html
+</html>
