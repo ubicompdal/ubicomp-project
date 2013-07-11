@@ -2,84 +2,87 @@
 
 //DAL LAYER!
 window.Db = (function(){
-	
+
+	//the url where thingbroker is located
+	var thingbroker = "http://localhost:8080/thingbroker/";
+
 	function url(id){
 		if(id)
-			return "http://" + window.location.host + "/thingbroker/things?thingId=" + id;
-		return "http://" + window.location.host + "/thingbroker/things";
+			return thingbroker + "things?thingId=" + id;
+		return thingbroker + "things";
 	}
-    
-    function profileUrl(){
-        return "http://" + window.location.host + '/thingbroker/things?type=profile';
-    }
-	
-	function Update(id, data){	
-		var sData = JSON.stringify({
-			thingId: data.email,
-            name: data.name,
-            type: "profile",
-			metadata: data
-		});
-		
-		return $.ajax({ 
-			type:"PUT", 
-			url : url(id), 
-			data: sData,  
-			contentType: "application/json",
-			dataType: "JSON" });
+
+	function profileUrl(){
+		return thingbroker + "things?type=profile";
 	}
-	
-	function Save(data){
-	
+
+	function Update(id, data){
 		var sData = JSON.stringify({
 			thingId: data.email,
 			name: data.name,
 			type: "profile",
 			metadata: data
 		});
-	
-		return $.ajax({ 
-			type:"POST", 
-			url : url(),
-			data: sData,  
+
+		return $.ajax({
+			type:"PUT",
+			url : url(id),
+			data: sData,
 			contentType: "application/json",
 			dataType: "JSON" });
 	}
-	
-	function SaveOrUpdate(data){	
+
+	function Save(data){
+
+		var sData = JSON.stringify({
+			thingId: data.email,
+			name: data.name,
+			type: "profile",
+			metadata: data
+		});
+
+		return $.ajax({
+			type:"POST",
+			url : url(),
+			data: sData,
+			contentType: "application/json",
+			dataType: "JSON" });
+	}
+
+	function SaveOrUpdate(data){
 		Get(data.email).done(function(_data){
-			Update(data.email, data);							
+			Update(data.email, data);
 		}).fail(function(){
 			Save(data);
-		});	
+		});
 	}
-	
-    function All(){                
-        var def = $.Deferred();
-        $.ajax({ 
-			type:"GET", 
+
+	function All(){
+		var def = $.Deferred();
+		$.ajax({
+			type:"GET",
 			url : profileUrl(),
 			contentType: "application/json",
 			dataType: "JSON"
 		}).done(function(data, textStatus, jqXHR) {
-			var items = _.pluck(data, 'metadata');			
-            def.resolve(items);			
+			var items = _.pluck(data, 'metadata');
+			def.resolve(items);
 		}).fail(def.reject);
 		return def.promise();
-    }
-    
+	}
+
 	function Get(id){
 		var def = $.Deferred();
-		
+
 		if(!id)
 		{
 			def.reject();
 			return def.promise();
 		}
-		
-		$.ajax({ 
-			type:"GET", 
-			url : url(id),			
+
+		$.ajax({
+			type:"GET",
+			url : url(id),
 			contentType: "application/json",
 			dataType: "JSON"
 		}).done(function(data, textStatus, jqXHR) {
@@ -97,7 +100,7 @@ window.Db = (function(){
 		profiles : {
 			get: Get,
 			save: SaveOrUpdate,
-            all: All
+			all: All
 		}
 	};
 })();
