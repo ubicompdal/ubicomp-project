@@ -21,6 +21,8 @@ $(document).ready(function () {
 		//if the speed is over 10m/s, they are cheaters.
 		var cheating = speed > 10;
 
+		//turn off cheat detection for now
+		cheating = false;
 		if(distance > 0 && !cheating){
 			App.triggerEvent("save:distance", { distance: distance, deltaTime: time, date: new Date() } );
 		} else {
