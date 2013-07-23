@@ -4,7 +4,7 @@
 window.Db = (function(){
 
 	//the url where thingbroker is located
-	var thingbroker = "http://localhost:8080/thingbroker/";
+	var thingbroker = "http://24.222.164.3:8080/thingbroker/";
 
 	function url(id){
 		if(id)
