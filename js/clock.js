@@ -1,32 +1,24 @@
-var h=0, m=0, s=0, ms=0;
-var timer;
-function showTime()
+var startTime, timer;
+function start()
 {
-	var today=new Date();
-	if(ms>=100){
-		ms = 0;
-		s++;
-	}
-	if(s>=60){
-		s = 0;
-		m++;
-	}
-	if(m>=60){
-		m = 0;
-		h++;
-	}
-	$("#clock .value").text(checkTime(h)+":"+checkTime(m)+":"+checkTime(s)+"."+checkTime(ms));
-	ms++;
+	var startTime = new Date();
 	timer=setTimeout('showTime()', 10);
 }
-// add a zero in front of numbers<10
-function checkTime(i)
-{
-	if (i<10)
-	{
-		i="0" + i;
+function showTime(){
+	var date1 = startTime;
+	var date2 = new Date();
+	if (date2 < date1) {
+		date2.setDate(date2.getDate() + 1);
 	}
-	return i;    
+	var diff = date2 - date1;
+
+	var msec = diff;
+	var hh = Math.floor(msec / 1000 / 60 / 60);
+	msec -= hh * 1000 * 60 * 60;
+	var mm = Math.floor(msec / 1000 / 60);
+	msec -= mm * 1000 * 60;
+	var ss = Math.floor(msec / 1000);
+	msec -= ss * 1000;
 }
 
 $(document).ready(function(){
@@ -35,8 +27,8 @@ $(document).ready(function(){
 		$(this).hide();
 		$("#stop").show();
 	});
-	$("#stop").click(function(){        
-        App.triggerEvent("stop:clock", getTimeInMilliseconds(h, m, s, ms));        
+	$("#stop").click(function(){
+		App.triggerEvent("stop:clock", getTimeInMilliseconds(h, m, s, ms));
 		h=0; m=0; s=0;
 		clearTimeout(timer);
 		$(this).hide();
