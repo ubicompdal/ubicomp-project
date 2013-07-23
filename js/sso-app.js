@@ -1,7 +1,7 @@
-var root = _.initial(location.pathname.split('/')).join('/');
+var root = "ubicomp-project";
 var routes = {
-    login: "http://" + window.location.host + root + "/login.html",
-    home: "http://" + window.location.host + root + "/index.html"
+    login: "http://" + window.location.host + "/" + root + "/login.html",   
+    home: "http://" + window.location.host + "/" + root + "/index.html"
 }
 
 var widget = AuthWidget({

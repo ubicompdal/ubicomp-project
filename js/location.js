@@ -21,20 +21,18 @@ $(document).ready(function () {
 		//if the speed is over 10m/s, they are cheaters.
 		var cheating = speed > 10;
 
-		//turn off cheat detection for now
-		cheating = false;
 		if(distance > 0 && !cheating){
 			App.triggerEvent("save:distance", { distance: distance, deltaTime: time, date: new Date() } );
 		} else {
 			alert('You didn\'t move or you were cheating. Don\'t be lazy!');
 		}
 	});
-
-	//start watching the user location
-	$("#start").click(function () {
+    $("#start").click(function () {
+		//reset the location array
 		locations = [];
-		watch = getLocation();
 	});
+	//start getting geolocation immediately
+	watch = getLocation();
 });
 
 //returns a watchlocation object
@@ -42,8 +40,11 @@ function getLocation() {
 
 	var success = function (position) {
 		locations.push(position.coords);
-		var distance = calculateDistance(locations).toFixed(3) + "km";
-		$("#distance .value").text(distance);
+		//if we are running, calculate the distance
+		if(running){
+			var distance = calculateDistance(locations).toFixed(3) + "km";
+			$("#distance .value").text(distance);
+		}
 	};
 	var error = function (error) {
 		alert('Error getting geolocation: ' + error.message);
