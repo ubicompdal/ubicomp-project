@@ -15,7 +15,7 @@
 		<link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="style.css" />
 	</head>
-<body onload="show();">
+	<body>
 		<div class="container" data-role="authWidget">
 			<form class="content">
 				<h2>FCS Run <span class="" data-role="revoke" style="display: none;">
@@ -41,25 +41,17 @@
 					</div>
 				</div>
 				<p>Click start to start running!</p>
-				<div class="alert alert-success" id="time">
-					<i id="clkimage" class="icon-time"></i>
+				<div class="alert alert-success" id="clock">
+					<i class="icon-time"></i>
 					<span class="value">00:00:00.00</span>
 				</div>
 				<div class="alert alert-warning" id="distance">
 					<i class="icon-group"></i>
 					<span class="value">0.000km</span>
 				</div>
-				
-				<input type="button" class="btn btn-success" id="start"  />				
-				<input type="button" class="btn btn-danger" id="stop" value="Stop" style="width:49%;"/>
-				<input type="button" class="btn btn-reset" id="reset" value="Reset" style="width:49%; "/>
-				
-				
-				<!-- <input type="button" class="btn btn-success" id="start"  />
-				
-				<input type="button" class="btn btn-danger" id="stop" value="Stop" style="width:50%;float:left;"/>
-				<input type="button" class="btn btn-reset" id="reset" value="Reset" style="width:50%;float:right;"/>
-			 --></form>
+				<input type="button" class="btn btn-success" id="start" value="Start"/>
+				<input type="button" class="btn btn-danger" id="stop" value="Stop"/>
+			</form>
 		</div> <!-- /container -->
 
 		<!-- example to load profile -->
