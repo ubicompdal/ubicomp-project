@@ -12,8 +12,7 @@ $(document).ready(function () {
     App.addEvent("stop:clock", function(time){
     	navigator.geolocation.clearWatch(watch);
     	var distance = calculateDistance(locations);
-    	var clk = $('#time .value').text().split(':');
-    	//var clk = $('#clock .value').text().split(':');
+    	var clk = $('#clock .value').text().split(':');
     	var seconds = parseInt(clk[0] * 3600) + parseInt(clk[1] * 60) + parseInt(clk[2]);
 
 		//distance is in km and time is in seconds
