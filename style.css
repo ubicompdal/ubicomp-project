@@ -5,7 +5,7 @@ body
     background-color: #333;
 }
 
-#clock, #distance, #time
+#clock, #distance
 {
     font-size: 2em;
     text-align: center;
@@ -45,13 +45,13 @@ body
 {
     padding: 0 !important;
 }
-`
+
 .nav a
 {
     margin: 0 !important;
 }
 
-#distance, #clock, #time
+#distance, #clock
 {
     line-height: 1em;
     font-size: 2em;
