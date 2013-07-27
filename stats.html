@@ -33,7 +33,7 @@
 			<form class="content">
 				<h2>FCS Run <span data-role="revoke" style="display: none;">
 					<a href="#" target="_blank" class="btn btn btn-primary pull-right">Sign-out</a>
-				</span></h2>
+				</span><img id='loading' src='images/ajax-loader-3.gif' style='display:none;'/></h2>
 				<span data-role="signin" style="display:none;">
 					<span
 					class="g-signin"
@@ -72,6 +72,17 @@
 		<script type="text/javascript">
 		(function($){
 			$(function(){
+			
+				$(document).ajaxStart(function () {
+					$("#loading").show();
+				});
+
+				$(document).ajaxComplete(function () {
+					setTimeout(function(){
+						$("#loading").hide();
+					}, 500);
+				});
+			
 				//waits for the profile load event and then updates the display with the new information
 				widget.addEvent("loaded:profile", function(profile){
 					Db.profiles.get(profile.email).done(function(profile){
