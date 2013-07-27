@@ -1,3 +1,11 @@
+//author: Kip Williams
+//date: July 20th, 2013
+//version 1.0
+
+//this is a helper function for the sso
+//it provides some business logic ontop of the widget
+// some routing mostly.
+
 var root = _.initial(location.pathname.split('/')).join('/');
 var routes = {
 	login: "http://" + window.location.host + root + "/login.html",
@@ -21,6 +29,7 @@ widget.addEvent("revoke:successful", function () {
 		window.location.href = routes.login;
 });
 
+//this will be called by google  with the token information for  the attempted login.
 function signinCallback(token) {
 	widget.signIn(token);
 }

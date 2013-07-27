@@ -2,6 +2,7 @@
 <head>
 	<title>Race</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="js/settings.js"></script>
 	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="js/jquery.thingbroker.min.js"></script>
     <script src="js/underscore-min.js"></script>
@@ -53,6 +54,7 @@
 
     <script type="text/javascript">
 
+		//this function is called from the polling to update the display of distances and people.
         function updateList() {
             Db.profiles.all().done(function(everyone){
                     everyone = _.sortBy(_.map(everyone, function(someone){

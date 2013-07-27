@@ -1,21 +1,28 @@
-//sahil ( kip :) )
+//author: Kip Williams
+//date: July 20th, 2013
+//version 1.0
+
+//this is the data access layer, it uses thing broker as the backend and requires settings.js to be included before hand.
+//the purpose is primarly to save the metadata attached to the profile to thingbroker
 
 //DAL LAYER!
 window.Db = (function(){
 
-	//the url where thingbroker is located
-	var thingbroker = "http://24.222.164.3:8080/thingbroker/";
-
+    //returns the url from thingbroker
+    //thingbroker variable is the root where thingbroker is installed
 	function url(id){
 		if(id)
 			return thingbroker + "things?thingId=" + id;
 		return thingbroker + "things";
 	}
 
+    //find all profiles
 	function profileUrl(){
 		return thingbroker + "things?type=profile";
 	}
 
+    //updates a particular profile.
+    //id is the profile id, and data is the metadata assigned to the profile.
 	function Update(id, data){
 		var sData = JSON.stringify({
 			thingId: data.email,
@@ -32,8 +39,9 @@ window.Db = (function(){
 			dataType: "JSON" });
 	}
 
+    //saves a new profile to thingbroker
+    //data is the metadata assigned to the new profile
 	function Save(data){
-
 		var sData = JSON.stringify({
 			thingId: data.email,
 			name: data.name,
@@ -49,6 +57,9 @@ window.Db = (function(){
 			dataType: "JSON" });
 	}
 
+    //This function is a helper around save and update
+    //if the profile has been saved before it will update it, otherwise it will save it.
+    //requires the meta data to be saved or updated.  The id look up is based on email.
 	function SaveOrUpdate(data){
 		Get(data.email).done(function(_data){
 			Update(data.email, data);
@@ -57,6 +68,7 @@ window.Db = (function(){
 		});
 	}
 
+    //returns all the profiles from thingbroker
 	function All(){
 		var def = $.Deferred();
 		$.ajax({
@@ -71,6 +83,7 @@ window.Db = (function(){
 		return def.promise();
 	}
 
+    //returns a single profile by id (email)
 	function Get(id){
 		var def = $.Deferred();
 
@@ -96,6 +109,7 @@ window.Db = (function(){
 		return def.promise();
 	}
 
+    //this is the public interface for the DAL.
 	return {
 		profiles : {
 			get: Get,
