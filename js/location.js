@@ -1,7 +1,10 @@
-/*
- *	Geolocation Logic
- *	Danny Wilson
- */
+//author: Danny Wilson
+//date: July 20th, 2013
+//version 1.0
+
+//this is the handler for all location based computation
+//including getting geolocation and calculating total distance
+
 // global variables
 var locations = [];
 var watch = null;

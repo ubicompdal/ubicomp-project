@@ -1,3 +1,12 @@
+//author: Danny Wilson
+//date: July 20th, 2013
+//version 1.0
+
+//this is the timer
+//including getting geolocation and calculating total distance
+
+
+//global variables
 var startTime;
 var timer;
 var total;
@@ -19,21 +28,24 @@ function showTime(){
 	msec -= ss * 1000;
 	$("#clock .value").text(pad(hh,2)+":"+pad(mm,2)+":"+pad(ss,2)+"."+pad(msec,3));
 }
-
+//pad the number with size zeros in front
 function pad(num, size) {
 	var s = num + "";
 	while (s.length < size) s = "0" + s;
 	return s;
 }
-
+//event handlers
 $(document).ready(function(){
+	//when the start button is pressed
 	$("#start").click(function(){
 		running = true;
 		startTime = new Date();
+		//start the timer
 		timer = setInterval(showTime, 100);
 		$("#stop").show();
 		$(this).hide();
 	});
+	//when the stop button is pressed
 	$("#stop").click(function(){
 		App.triggerEvent("stop:clock", total);
 		running = false;
@@ -42,7 +54,7 @@ $(document).ready(function(){
 		$(this).hide();
 	});
 });
-
+//don't let the user navigate before they have saved
 $(window).bind("beforeunload",function(event) {
 	if(running)
 		return "You have unsaved changes";
